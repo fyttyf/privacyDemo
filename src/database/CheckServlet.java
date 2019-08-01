@@ -7,8 +7,8 @@ import bean.ImageBean;
 public class CheckServlet implements javax.servlet.Servlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
-        final int IMAGENUM = 2;
-        String userId = "00000";
+        final int IMAGENUM = 9;
+        String userId =request.getParameter("uid");
         int imageId = Integer.parseInt(request.getParameter("id"));
         //String imageName = imageId+".jpg";
         int lowerL = Integer.parseInt(request.getParameter("l"));
@@ -37,7 +37,7 @@ public class CheckServlet implements javax.servlet.Servlet{
                 if(Math.random()>0.5){
                     lowerL = (int)(8+ Math.random()*4-2);
                     upperL = 264-lowerL;
-                    url = String.format("display.jsp?id=%d&l=%d&u=%d", imageId, lowerL, upperL);
+                    url = String.format("display.jsp?uid=%s&id=%d&l=%d&u=%d", userId, imageId, lowerL, upperL);
                     response.sendRedirect(url);
                 }else{
                     response.sendRedirect("attentionCheck.jsp");
@@ -52,7 +52,7 @@ public class CheckServlet implements javax.servlet.Servlet{
                 cs.insertData(userId, imageId, lowerL, upperL, 1, 0);
                 upperL = resolution;
                 //new ImageBean().generateImage(imageId, (lowerL+upperL)/2);
-                url = String.format("display.jsp?id=%d&l=%d&u=%d", imageId, lowerL, upperL);
+                url = String.format("display.jsp?uid=%s&id=%d&l=%d&u=%d", userId, imageId, lowerL, upperL);
                 response.sendRedirect(url);
             }
 
@@ -63,7 +63,7 @@ public class CheckServlet implements javax.servlet.Servlet{
                 //出题
                 lowerL = (int)(8+ Math.random()*4-2);
                 upperL = 264-lowerL;
-                url = String.format("display.jsp?id=%d&l=%d&u=%d", (int)(Math.random()*IMAGENUM+1), lowerL, upperL);
+                url = String.format("display.jsp?uid=%s&id=%d&l=%d&u=%d", userId, (int)(Math.random()*IMAGENUM+1), lowerL, upperL);
                 response.sendRedirect(url);
 
             }else{
@@ -71,7 +71,7 @@ public class CheckServlet implements javax.servlet.Servlet{
                 cs.insertData(userId, imageId, lowerL, upperL, 0, 0);
                 lowerL = resolution;
                 //new ImageBean().generateImage(imageId, (lowerL+upperL)/2);
-                url = String.format("display.jsp?id=%d&l=%d&u=%d", imageId, lowerL, upperL);
+                url = String.format("display.jsp?uid=%s&id=%d&l=%d&u=%d", userId, imageId, lowerL, upperL);
                 response.sendRedirect(url);
             }
 
