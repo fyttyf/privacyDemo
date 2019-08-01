@@ -22,9 +22,12 @@ public class ImageBean implements Serializable {
     }
     public static void main(String[] args){
         ImageBean ib = new ImageBean();
-        for (int i=6; i<266; i++){
-            ib.generateImage(2,i);
+        for (int imageId=3; imageId<10; imageId++){
+            for (int i=6; i<266; i++){
+                ib.generateImage(imageId,i);
+            }
         }
+
 
     }
 
